@@ -3,10 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
 <title>Calibration test v2</title>
 <style>
-:root{--bg:#0d0d0b;--surface:#141412;--surface2:#1a1a17;--surface3:#201f1c;--border:rgba(255,255,255,.06);--border2:rgba(255,255,255,.1);--border3:rgba(255,255,255,.16);--text:#ede9e0;--text2:#8c897f;--text3:#4f4d47;--gold:#c8a45e;--gold2:rgba(200,164,94,.12);--green:#7aab8a;--rose:#b87878;--blue:#7096b8;
---serif:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif;--sans:-apple-system,"Segoe UI",Inter,Roboto,Helvetica,Arial,sans-serif;--mono:"SF Mono",Menlo,Consolas,monospace}
+:root{--bg:#1B2440;--surface:#232D52;--surface2:#2B3660;--surface3:#33406E;--border:rgba(255,255,255,.07);--border2:rgba(255,255,255,.12);--border3:rgba(255,255,255,.18);--text:#EDEEF5;--text2:#9AA0C0;--text3:#5C6390;--gold:#B8934A;--gold2:rgba(184,147,74,.14);--sage:#7C8F6E;--rose:#B87878;--lilac:#8D7EB5;
+--serif:'Fraunces','Iowan Old Style',Palatino,Georgia,serif;--sans:'IBM Plex Sans',-apple-system,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;--mono:'IBM Plex Mono','SF Mono',Menlo,Consolas,monospace}
 *{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-family:var(--sans);font-size:15px;line-height:1.55}
 .wrap{max-width:760px;margin:0 auto;padding:28px 20px 80px}
 h1,h2,h3{font-family:var(--serif);font-weight:500;margin:0 0 8px}h1{font-size:28px}h2{font-size:22px}h3{font-size:17px}
@@ -51,7 +52,7 @@ table{width:100%;border-collapse:collapse;font-size:13px}th,td{text-align:left;p
     <div><label for="tp">Time point</label><select id="tp"><option>T0</option><option>T-mid</option><option>T1</option><option>demo</option></select></div>
     <div><label for="pas">Passage</label><select id="pas"><option value="auto">Next unused for this code</option><option value="0">A</option><option value="1">B</option><option value="2">C</option></select></div>
   </div>
-  <div class="hint">You will guess answers to four questions <em>before</em> reading. Wrong guesses are expected and useful — they make the later reading stick. Then you read, rate yourself twice, do a two-minute unrelated task, and take the test.</div>
+  <div class="hint">You will guess answers to four questions <em>before</em> reading. Wrong guesses are expected and useful - they make the later reading stick. Then you read, rate yourself twice, do a two-minute unrelated task, and take the test.</div>
   <div class="actions"><button class="primary" id="go0">Begin</button></div>
 </section>
 
@@ -93,7 +94,7 @@ table{width:100%;border-collapse:collapse;font-size:13px}th,td{text-align:left;p
 <!-- DELAYED JOL -->
 <section class="panel hidden" id="s5">
   <h2>Now, question by question</h2>
-  <p class="muted small">For each question, how confident are you that you'll answer it correctly? Don't answer yet — just rate.</p>
+  <p class="muted small">For each question, how confident are you that you'll answer it correctly? Don't answer yet - just rate.</p>
   <div id="dj"></div>
   <div class="actions"><button class="primary" id="go5">Take the test</button></div>
 </section>
@@ -101,7 +102,7 @@ table{width:100%;border-collapse:collapse;font-size:13px}th,td{text-align:left;p
 <!-- TEST -->
 <section class="panel hidden" id="s6">
   <h2>Test</h2>
-  <p class="muted small">Answer from memory. After you type each answer, check it against the key and score yourself honestly — nobody else sees this unless you export it.</p>
+  <p class="muted small">Answer from memory. After you type each answer, check it against the key and score yourself honestly - nobody else sees this unless you export it.</p>
   <div id="test"></div>
   <div class="actions"><button class="primary" id="go6">See results</button></div>
 </section>
@@ -118,7 +119,7 @@ table{width:100%;border-collapse:collapse;font-size:13px}th,td{text-align:left;p
   </div>
   <div class="stats">
     <div class="stat"><div class="v" id="r-gimm">–</div><div class="k">Immediate global error</div><div class="why">predicted − actual, in questions.</div></div>
-    <div class="stat"><div class="v" id="r-gdel">–</div><div class="k">Delayed global error</div><div class="why">usually smaller — that's the delayed-JOL effect.</div></div>
+    <div class="stat"><div class="v" id="r-gdel">–</div><div class="k">Delayed global error</div><div class="why">usually smaller - that's the delayed-JOL effect.</div></div>
     <div class="stat"><div class="v" id="r-pre">–</div><div class="k">Pretest advantage</div><div class="why">score on the 4 guessed items minus the other 4.</div></div>
   </div>
   <p id="r-read"></p>
@@ -159,7 +160,7 @@ $('go0').onclick=()=>{
 };
 function renderPre(){const d=$('pre');d.innerHTML='';R.items.filter(x=>x.pretest).forEach((it,i)=>{const e=document.createElement('div');e.className='item';e.innerHTML=`<div><span class="idx">${i+1}</span>${esc(it.q)}</div><textarea data-i="${i}" class="g" rows="2" placeholder="Your best guess"></textarea><div class="conf"><label style="margin:0;min-width:80px">Confidence</label><input type="range" class="pc" data-i="${i}" min="0" max="100" step="5" value="50"><output>50%</output></div>`;d.appendChild(e)})}
 $('pre').addEventListener('input',e=>{const it=R.items[+e.target.dataset.i];if(e.target.classList.contains('g'))it.guess=e.target.value;if(e.target.classList.contains('pc')){it.pconf=+e.target.value;e.target.nextElementSibling.textContent=it.pconf+'%'}});
-$('go1').onclick=()=>{if(R.items.slice(0,4).some(it=>!it.guess.trim())){toast('Write a guess for each — even "no idea, maybe X".');return;}startRead()};
+$('go1').onclick=()=>{if(R.items.slice(0,4).some(it=>!it.guess.trim())){toast('Write a guess for each - even "no idea, maybe X".');return;}startRead()};
 
 // read
 let rt=null,rleft=240;
@@ -201,7 +202,7 @@ function compute(R){const it=R.items,n=it.length;const score=it.reduce((a,x)=>a+
 const f2=v=>(v===null||isNaN(v))?'–':(v>0?'+':'')+(+v).toFixed(2);
 function showResults(){const s=R.summary;$('r-score').textContent=s.score;$('r-ij').textContent=R.ij;$('r-dj').textContent=R.dj.toFixed(1);$('r-abs').textContent=s.abs.toFixed(2);$('r-bias').textContent=f2(s.bias);$('r-disc').textContent=f2(s.disc);$('r-gimm').textContent=f2(s.gimm);$('r-gdel').textContent=f2(s.gdel);$('r-pre').textContent=f2(s.preadv);
   const read=[];if(s.bias>0.15)read.push('You expected more than you recalled. That is the common pattern; the fix is to test yourself before you rate yourself.');else if(s.bias<-0.15)read.push('You recalled more than you expected. Underconfidence wastes review time on things you already know.');else read.push('Your confidence tracked your recall closely.');
-  if(Math.abs(s.gdel)<Math.abs(s.gimm))read.push('Your delayed estimate was closer than your immediate one — rating yourself after a gap works.');if(s.preadv>0.2)read.push('The four items you guessed at first were recalled better than the four you didn\'t — asking before reading did its job.');$('r-read').textContent=read.join(' ')}
+  if(Math.abs(s.gdel)<Math.abs(s.gimm))read.push('Your delayed estimate was closer than your immediate one - rating yourself after a gap works.');if(s.preadv>0.2)read.push('The four items you guessed at first were recalled better than the four you didn\'t - asking before reading did its job.');$('r-read').textContent=read.join(' ')}
 
 // history / export
 $('save').onclick=()=>{const all=load();all.push(R);localStorage.setItem(KEY,JSON.stringify(all));toast('Saved.');showHist()};
